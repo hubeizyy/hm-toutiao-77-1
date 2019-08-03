@@ -3,9 +3,13 @@ import App from './App.vue'
 // 导入与使用element-ui
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import '@/style/index.less'
+// 挂载vue实例在任何组件都可发请求
+import axios from 'axios'
 // @路径别名 绝对路径  在vue-cli创建的项目下才可使用
 // 后缀为.js .vue .json  才可默认找前名为index，才可省略index文件
 import router from '@/router'
+Vue.prototype.$http = axios
 Vue.use(ElementUI)
 // App根组件
 // tip提示信息  在控制台的提示信息
