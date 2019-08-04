@@ -32,6 +32,7 @@
 </div>
 </template>
 <script>
+import store from '@/store'
 export default {
   data () {
     const checkMobile = (rule, value, callback) => {
@@ -75,7 +76,9 @@ export default {
             )
             .then(res => {
               // res响应对象 ，包含响应主体
-              console.log(res.data)
+              // console.log(res.data)//内部是对象
+              // 存储用户信息
+              store.setUser(res.data.data)
               this.$router.push('/')
             })
             .catch(() => {
