@@ -71,7 +71,7 @@ export default {
           // 请求登录接口
           this.$http
             .post(
-              'http://ttapi.research.itcast.cn/mp/v1_0/authorizations',
+              'authorizations',
               this.loginForm
             )
             .then(res => {

@@ -6,6 +6,7 @@ import Home from '@/views/home'
 import Welcome from '@/views/welcome'
 import Article from '@/views/article'
 import NotFound from '@/views/404'
+import store from '@/store'
 Vue.use(VueRouter)
 const router = new VueRouter({
   // 路由规则配置
@@ -39,5 +40,20 @@ const router = new VueRouter({
       path: '*', name: '404', component: NotFound
     }
   ]
+})
+/*
+to: Route: 即将要进入的目标 路由对象
+from: Route: 当前导航正要离开的路由
+next: Function: 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数
+*/
+router.beforeEach((to, from, next) => {
+// // 1判断是不是登录路由
+//   if (to.path === '/login') return next()
+//   // 2判断是否登录
+//   if (!store.getUser().toKen) return next('/login')
+//   // 3放行
+//   next()
+  if (to.path !== '/login' && !store.getUser().token) return next('/login')
+  next()
 })
 export default router
