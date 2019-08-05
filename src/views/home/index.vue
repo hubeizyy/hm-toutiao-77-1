@@ -60,8 +60,8 @@
             <el-dropdown-menu slot="dropdown">
               <!-- <el-dropdown-item @click.native="setting()">个人设置</el-dropdown-item>
               <el-dropdown-item @click.native="logout()">退出登录</el-dropdown-item> -->
-              <el-dropdown-item command="setting">个人设置</el-dropdown-item>
-              <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+              <el-dropdown-item command="setting" icon="el-icon-setting">个人设置</el-dropdown-item>
+              <el-dropdown-item command="logout" icon="el-icon-unlock">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
      </el-header>

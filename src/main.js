@@ -10,6 +10,8 @@ import '@/style/index.less'
 // 后缀为.js .vue .json  才可默认找前名为index，才可省略index文件
 import router from '@/router'
 import axios from '@/api'
+import myCom from '@/components'
+Vue.use(myCom)
 Vue.prototype.$http = axios
 Vue.use(ElementUI)
 // App根组件
