@@ -50,15 +50,18 @@
       <el-header>
           <span  @click="toggleMenu()" class="el-icon-s-fold"></span>
           <span class="text">江苏传智播客教育有限公司</span>
-          <el-dropdown class="my-dropdown">
+          <el-dropdown class="my-dropdown" @command="changeMenu" >
             <span class="el-dropdown-link">
-                <img src="../../assets/images/avatar.jpg" alt="">
-              用户名称<i class="el-icon-arrow-down el-icon--right"></i>
+              <img :src="photo" alt="">
+              {{name}}
+              <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <!-- slot 属性vue提供的  插槽   elementUI提供的属性 disabled禁用 divided下划线-->
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>个人设置</el-dropdown-item>
-              <el-dropdown-item>退出登录</el-dropdown-item>
+              <!-- <el-dropdown-item @click.native="setting()">个人设置</el-dropdown-item>
+              <el-dropdown-item @click.native="logout()">退出登录</el-dropdown-item> -->
+              <el-dropdown-item command="setting">个人设置</el-dropdown-item>
+              <el-dropdown-item command="logout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
      </el-header>
@@ -72,18 +75,46 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
   data () {
     return {
       // isCollapse: true  原始为true 是折叠状态
-      isCollapse: false
+      isCollapse: false,
+      name: '',
+      photo: ''
 
     }
+  },
+  // 获取用户信息
+  created () {
+    const user = store.getUser()
+    this.name = user.name
+    this.photo = user.photo
   },
   methods: {
     //   切换侧边栏展开与收起。默认展开
     toggleMenu () {
       this.isCollapse = !this.isCollapse
+    },
+    // setting () {
+    //   this.$router.push('/setting')
+    // },
+    // logout () {
+    //   store.clearUser()
+    //   this.$router.push({ name: 'login' })
+    // },
+    setting () {
+      this.$router.push('/setting')
+    },
+    logout () {
+      store.clearUser()
+      this.$router.push({ name: 'login' })
+    },
+
+    changeMenu (menuType) {
+      // menuType 是变量  值是setting  logout
+      this[menuType]()
     }
   }
 }

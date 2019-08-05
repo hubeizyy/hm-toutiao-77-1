@@ -65,26 +65,34 @@ export default {
   methods: {
     login () {
       // 对整个表单进行校验
-      this.$refs.loginForm.validate(valid => {
+      this.$refs.loginForm.validate(async valid => {
         if (valid) {
           // console.log('校验成功')
           // 请求登录接口
-          this.$http
-            .post(
-              'authorizations',
-              this.loginForm
-            )
-            .then(res => {
-              // res响应对象 ，包含响应主体
-              // console.log(res.data)//内部是对象
-              // 存储用户信息
-              store.setUser(res.data.data)
-              this.$router.push('/')
-            })
-            .catch(() => {
-              // 错误提示
-              this.$message.error('手机号或验证码错误')
-            })
+          // this.$http
+          //   .post(
+          //     'authorizations',
+          //     this.loginForm
+          //   )
+          //   .then(res => {
+          //     // res响应对象 ，包含响应主体
+          //     // console.log(res.data)//内部是对象
+          //     // 存储用户信息
+          //     store.setUser(res.data.data)
+          //     this.$router.push('/')
+          //   })
+          //   .catch(() => {
+          //     // 错误提示
+          //     this.$message.error('手机号或验证码错误')
+          //   })
+          try {
+            const { data: { data } } = await this.$http.post('authorizations', this.loginForm)
+            store.setUser(data)
+            this.$router.push('/')
+          } catch (e) {
+            // 错误提示
+            this.$message.error('手机号或验证码错误')
+          }
         }
       })
     }
