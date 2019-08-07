@@ -7,8 +7,30 @@
 import axios from 'axios'
 import store from '@/store'
 import router from '@/router'
+import JSONBig from 'json-bigint'
 // 进行配置
 axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0/'
+// `transformResponse` 在传递给 then/catch 前，允许修改响应数据
+// axios.defaults.transformResponse = [
+//   (data) => {
+//   // 对 data 进行任意转换处理
+//     return JSONBig.parse(data)
+//   }
+// ]
+// 响应无内容处理
+axios.defaults.transformResponse = [
+  (data) => {
+  // 对 data 进行任意转换处理
+  // data此时是后端的原始数据，后台没有返回数据  值为null
+  // JSONBig.parse(null)  报错  阻止程序运行
+    try {
+      return JSONBig.parse(data)
+    } catch (e) {
+      return data
+    }
+  }
+]
+
 // axios.defaults.headers = { Authorization: `Bearer ${store.getUser().toKen}` }
 // 请求拦截器，在每次请求前 做某一件事
 // 请求拦截器：在每次请求前 做某一些事情
