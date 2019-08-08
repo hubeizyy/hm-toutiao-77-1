@@ -42,7 +42,7 @@ export default {
       channelOptions: []
     }
   },
-  cerated () {
+  created () {
     // 获取频道下拉选项数据
     this.getChannelOptions()
   },
@@ -51,14 +51,14 @@ export default {
     async getChannelOptions () {
       const { data: { data } } = await this.$http.get('channels')
       this.channelOptions = data.channels
-    }
-  },
-  fn (val) {
+    },
+    fn (val) {
     // 空字符处理成null
-    if (val === '') val = null
-    // 子组件改变的值数据提交给父组件使用
-    // 提供的改变值
-    this.$emit('input', val)
+      if (val === '') val = null
+      // 子组件改变的值数据提交给父组件使用
+      // 提供的改变值
+      this.$emit('input', val)
+    }
   }
 }
 </script>
