@@ -15,19 +15,17 @@
             <el-radio :label="3">审核失败</el-radio>
           </el-radio-group>
         </el-form-item>
+
         <!-- 频道下拉渲染 -->
         <el-form-item label="频道：">
-          <!-- 频道清空 -->
-          <el-select v-model="reqParams.channel_id" clearable placeholder="请选择">
-            <!-- value 相当于id  作为下拉菜单的唯一标识 -->
-            <!-- 3 重新赋值 -->
-            <el-option
-              v-for="item in channelOptions"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"
-            ></el-option>
-          </el-select>
+        <!-- 放置频道组件 -->
+        <!-- v-model :value @input -->
+        <!-- v-model 的语法糖本质，作用双向数据绑定，只能给表单元素绑定。
+         设置值    v-bind:value="数据名字"
+         返回值    v-on:input="数据名字=当前元素值"
+         -->
+        <my-channel v-model="reqParams.channel_id"></my-channel>
+
         </el-form-item>
         <!-- 内容管理列表渲染 -->
         <el-form-item label="日期：">
@@ -148,8 +146,6 @@ export default {
         page: 1,
         per_page: 20
       },
-      // 1 频道下拉数据
-      channelOptions: [],
       // 日期数据
       dateArr: [],
       // 1-1准备文章列表数据
@@ -158,21 +154,7 @@ export default {
       total: 0
     }
   },
-  // 计算属性使用场景：当你需要一个新的数据，需要依赖data中的数据
-  // 侦听器：当需要监听某一个属性的变化，去做一些开销较大的操作【向后台发请求拿数据】；异步操作
-  // 2 在组件初始化的获取频道下拉选项数据与列表数据
-  watch: {
-    // 频道清空
-    // 此处是给后台的传值，要么为数值，要么是无，此处判断为空的情况
-    // 两层结构的监听 属性.  作为方法名
-    'reqParams.channel_id': function (newVal, oldVal) {
-      if (newVal === '') {
-        this.reqParams.channel_id = null
-      }
-    }
-  },
   created () {
-    this.getChannelOptions()
     this.getArticles()
   },
   methods: {
@@ -218,11 +200,6 @@ export default {
       //  修改获取数据的页码
       this.reqParams.page = newPage
       this.getArticles()
-    },
-    // 获取下拉菜单方法
-    async getChannelOptions () {
-      const { data: { data } } = await this.$http.get('channels')
-      this.channelOptions = data.channels
     },
     // 2-2
     // 获取列表方法
