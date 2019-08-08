@@ -7,6 +7,7 @@ import Welcome from '@/views/welcome'
 import Article from '@/views/article'
 import NotFound from '@/views/404'
 import Image from '@/views/image'
+import Publish from '@/views/publish'
 import store from '@/store'
 Vue.use(VueRouter)
 const router = new VueRouter({
@@ -26,7 +27,8 @@ const router = new VueRouter({
       children: [
         { path: '/', name: 'welcome', component: Welcome },
         { path: '/article', name: 'article', component: Article },
-        { path: '/image', name: 'image', component: Image }
+        { path: '/image', name: 'image', component: Image },
+        { path: '/publish', name: 'publish', component: Publish }
       ]
     },
     // path: '*' 通配路由，从上往下，找不到显示404
