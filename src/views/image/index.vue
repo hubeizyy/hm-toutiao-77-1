@@ -157,7 +157,7 @@ export default {
     border:1px dashed #ddd;
     position: relative;
     display: inline-block;
-    margin-right:30px;
+    margin-right:50px;
     margin-bottom: 30px;
 
     img{
