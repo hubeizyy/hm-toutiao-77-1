@@ -138,7 +138,7 @@ export default {
       )
       this.$message.success(draft ? '修改存入草稿成功' : '文章修改成功')
       // 去内容管理
-      this.$router.push('/article')
+      this.$router.push('/articles')
     }
   }
 }
