@@ -129,7 +129,7 @@ export default {
       await this.$http.post(`articles?draft=${draft}`, this.articleForm)
       this.$message.success(draft ? '文章存入草稿成功' : '文章发表成功')
       // 成功后跳转到内容管理
-      this.$router.push('/articles')
+      this.$router.push('/article')
     },
     async updata (draft) {
       await this.$http.put(
@@ -138,7 +138,7 @@ export default {
       )
       this.$message.success(draft ? '修改存入草稿成功' : '文章修改成功')
       // 去内容管理
-      this.$router.push('/articles')
+      this.$router.push('/article')
     }
   }
 }
