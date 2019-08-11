@@ -9,6 +9,7 @@ import NotFound from '@/views/404'
 import Image from '@/views/image'
 import Publish from '@/views/publish'
 import Comment from '@/views/comment'
+import Setting from '@/views/setting'
 import store from '@/store'
 Vue.use(VueRouter)
 const router = new VueRouter({
@@ -30,7 +31,8 @@ const router = new VueRouter({
         { path: '/article', name: 'article', component: Article },
         { path: '/image', name: 'image', component: Image },
         { path: '/publish', name: 'publish', component: Publish },
-        { path: '/comment', name: 'comment', component: Comment }
+        { path: '/comment', name: 'comment', component: Comment },
+        { path: '/setting', name: 'setting', component: Setting }
       ]
     },
     // path: '*' 通配路由，从上往下，找不到显示404

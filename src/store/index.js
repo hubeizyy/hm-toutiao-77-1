@@ -8,7 +8,15 @@ const KEY = 'hm-toutiao-77-1-user'
 export default {
   setUser (user) {
     // 存储用户信息到sessionStorage
-    window.sessionStorage.setItem(KEY, JSON.stringify(user))
+    // 现在实现的只是：给什么存什么，完整存储
+  //   window.sessionStorage.setItem(KEY, JSON.stringify(user))
+  // },
+  // 现在需要实现的是，局部修改某一个属性
+    const localUser = this.getUser() // 如果登录时候使用{}空对象  或者有对象{id,name,photo,token,refresh_token} 完整信息
+    // 新的对象  本地获取的和后传入的信息的合并
+    const newUser = { ...localUser, ...user }
+    // 2 - 更新本地存储用户信息
+    window.sessionStorage.setItem(KEY, JSON.stringify(newUser))
   },
   getUser () {
     // 获取用户信息从sessionStorage
